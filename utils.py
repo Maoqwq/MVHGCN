@@ -1,4 +1,5 @@
 import random
+import torch
 import numpy as np
 from sklearn.metrics import roc_auc_score
 import h5py
@@ -17,7 +18,8 @@ def link_prediction(model, adj_val, fea_val, fold, pos_dict, neg_dict, ncirc, th
     pred_pos_list = []  
 
     model.eval()
-    score_ = model.forward(adj_val, fea_val, fold) 
+    with torch.no_grad:
+        score_ = model.forward(adj_val, fea_val, fold) 
     score_ = score_.detach().cpu().numpy()
     score =  1.0 / (1.0 + np.exp(-score_))
     
