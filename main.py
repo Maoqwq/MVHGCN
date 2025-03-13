@@ -52,7 +52,7 @@ def main(args):
                 score= model.forward(As[j], feature[j], i)
                 loss = model.loss(args.loss, score,pos[j],neg[j],args.temperature)
 
-                loss = loss.requires_grad_()
+                # loss = loss.requires_grad_()
                 opt.zero_grad()
                 loss.backward()
                 opt.step()
