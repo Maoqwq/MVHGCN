@@ -18,7 +18,7 @@ def link_prediction(model, adj_val, fea_val, fold, pos_dict, neg_dict, ncirc, th
     pred_pos_list = []  
 
     model.eval()
-    with torch.no_grad:
+    with torch.no_grad():
         score_ = model.forward(adj_val, fea_val, fold) 
     score_ = score_.detach().cpu().numpy()
     score =  1.0 / (1.0 + np.exp(-score_))
